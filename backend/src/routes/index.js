@@ -1,10 +1,14 @@
 import express from 'express';
-const cors = require('cors');
+import bodyParser from 'body-parser';
+import { sessionController, sessionMiddleware } from '../dependencies';
 
+const cors = require('cors');
 const router = express.Router();
 router.use(cors());
+router.use(bodyParser.json());
 
-router.get('/:id', (req,res) => res.status(200).send(req.params.id) );
-
+router.post('/session', sessionController.post );
+router.use('/items', sessionMiddleware.post );
+router.get('/items', (req, res) => res.status(200).send({userid : req.userid}));
 
 export default router;
