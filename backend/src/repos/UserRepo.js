@@ -16,4 +16,12 @@ export class UserRepo {
 
     };
 
+    async getById({ userid }) {
+
+        const userdata = (await db.query('SELECT * FROM users WHERE id=?', [userid])).results[0];
+        if (!userdata) throw new Error('invalidUserId');
+        return userdata;
+
+    };
+
 };
