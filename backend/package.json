@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "test": "jest --watchAll",
     "start": "nodemon --exec babel-node -r ./node_modules/dotenv/config src/index.js",
     "build": "babel src -d dist",
     "serve": "node dist/index.js"
