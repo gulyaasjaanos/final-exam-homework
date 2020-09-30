@@ -11,7 +11,7 @@ export class SessionMiddleware {
             req.userid = this.session.verifyToken({token: req.header('TOKEN')}).userid;
             next();
         } catch(error) {
-            res.status(403).send({error: error.message});
+            next(error);
         }     
 
     };

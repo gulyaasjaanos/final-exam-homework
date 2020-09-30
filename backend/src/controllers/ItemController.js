@@ -6,7 +6,7 @@ export class ItemController {
         this.get = this.get.bind(this);
     };
 
-    async post(req, res) {
+    async post(req, res, next) {
 
         const userid = req.userid;
         const { itemid } = req.params;
@@ -15,12 +15,12 @@ export class ItemController {
             const result = (!itemid)? await this.item.add({ userid, itemname, description, url, price }) : await this.item.buy({ userid, itemid })
             res.status(200).send(result);
         } catch(error) {
-            res.status(403).send({error: error.message});
+            next(error);
         }
 
     };
 
-    async get(req, res) {
+    async get(req, res, next) {
 
         const userid = req.userid;
         const { itemid } = req.params;
@@ -28,7 +28,7 @@ export class ItemController {
             const result = (!itemid)? await this.item.list() : await this.item.get({ itemid })
             res.status(200).send(result);
         } catch(error) {
-            res.status(403).send({error: error.message});
+            next(error);
         }
 
     };

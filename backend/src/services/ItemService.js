@@ -92,7 +92,7 @@ export class ItemService {
 
       if (!itemid) throw new Error('missingItemId');
       let item = await this.item.getById(itemid);
-      if (item.length === 0) throw new Error('invalidItemId');
+      if (!item) throw new Error('invalidItemId');
 
       if (item.status === 'sellable') {
         delete item.buyername;

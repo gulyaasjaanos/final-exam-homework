@@ -3,7 +3,8 @@ import bodyParser from 'body-parser';
 import { 
     sessionController,
     itemController,
-    sessionMiddleware
+    sessionMiddleware,
+    errorHandler
 } from '../dependencies';
 
 const cors = require('cors');
@@ -17,5 +18,9 @@ router.get('/items', itemController.get );
 router.get('/items/:itemid', itemController.get );
 router.post('/items', itemController.post );
 router.post('/items/:itemid', itemController.post );
+
+router.use((err, req, res, next) => {
+    errorHandler.post(err, res);
+});
 
 export default router;

@@ -5,14 +5,14 @@ export class SessionController {
         this.post = this.post.bind(this);
     };
 
-    async post(req, res) {
+    async post(req, res, next) {
 
         const { username, password } = req.body;
         try {
             const token = await this.session.login({ username, password });
             res.status(201).send({token});
         } catch(error) {
-            res.status(403).send({error: error.message});
+            next(error);
         }     
 
     };

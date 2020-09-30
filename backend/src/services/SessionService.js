@@ -15,6 +15,7 @@ export class SessionService {
     };
 
     verifyToken({ token }) {
+
         try {
           const { userid } = jwt.verify(
             token,
@@ -24,6 +25,7 @@ export class SessionService {
         } catch (error) {
           throw new Error('notAuthenticated');
         }
+        
       }
 
 };
