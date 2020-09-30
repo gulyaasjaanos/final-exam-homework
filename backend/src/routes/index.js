@@ -19,8 +19,6 @@ router.get('/items/:itemid', itemController.get );
 router.post('/items', itemController.post );
 router.post('/items/:itemid', itemController.post );
 
-router.use((err, req, res, next) => {
-    errorHandler.post(err, res);
-});
+router.use('/', errorHandler.post );
 
 export default router;

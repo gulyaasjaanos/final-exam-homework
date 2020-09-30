@@ -24,7 +24,7 @@ export class ErrorHandler {
 
     };
 
-    async post(err, res) {
+    async post(err, req, res, next) {
 
         const errorCode = err.message;
         let {status, message} =  this.errors[errorCode] || this.errors.defaultCode;
