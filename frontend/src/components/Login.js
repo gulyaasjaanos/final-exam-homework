@@ -16,9 +16,12 @@ function Login() {
   }, [loggedIn]);
 
   
-  const login = () => {
-    localStorage.setItem('token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyaWQiOnsidXNlcmlkIjoyfSwiaWF0IjoxNjAxNTg0MjQyfQ.HRx55gI9Ta_XMxj082CjS-9ZZjYBqteXg3VYNnh-jbA');
-    setLoggedIn(true);
+  const login = async () => {
+    const token = await sessionService.login({ username, password });
+    if (token) {
+        localStorage.setItem('token',  token);
+        setLoggedIn(true);
+    }
   };
 
   const changeUsername = (e) => {
