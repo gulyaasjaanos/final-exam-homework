@@ -26,6 +26,6 @@ export class SessionService {
           throw new Error('notAuthenticated');
         }
         
-      }
+    };
 
 };

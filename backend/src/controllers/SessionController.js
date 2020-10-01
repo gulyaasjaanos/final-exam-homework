@@ -7,9 +7,10 @@ export class SessionController {
 
     async post(req, res, next) {
 
+        const tokenParam = req.header('TOKEN');
         const { username, password } = req.body;
         try {
-            const token = await this.session.login({ username, password });
+            const token = (!tokenParam)? await this.session.login({ username, password }) : await this.session.verifyToken({ token : tokenParam });
             res.status(200).send({token});
         } catch(error) {
             next(error);
