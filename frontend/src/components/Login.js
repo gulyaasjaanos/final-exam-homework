@@ -2,8 +2,10 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import sessionService from '../services/sessionService';
 import { Redirect } from 'react-router-dom';
+import { adderror } from '../actions';
+import { connect } from 'react-redux';
 
-function Login() {
+function LoginComponent({error, adderror}) {
   
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -24,8 +26,9 @@ function Login() {
     if (logged.token) {
         localStorage.setItem('token',  logged.token);
         setLoggedIn(true);
+        adderror('');
     } else {
-      console.log(logged.error);
+      adderror(logged.error);
     }
   };
 
@@ -52,4 +55,18 @@ function Login() {
 
 }
 
-export default Login;
+const mapStateToProps = state => (
+  {
+    error: state.error,
+  }
+);
+
+
+const mapDispatchToProps = dispatch => (
+  {
+    adderror: (message) => dispatch( adderror(message) )
+  }
+);
+ 
+
+export const Login = connect(mapStateToProps,mapDispatchToProps)( LoginComponent );
