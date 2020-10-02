@@ -1,21 +1,29 @@
 import React,{useState,useEffect} from 'react';
 import {Redirect} from 'react-router-dom';
-import {authService} from '../services/authService';
+import sessionService from '../services/sessionService';
 
-const WithAuth = (Component, redirectLocation) => {
-    return function WithAuthComponent({...props}) {
+const WithSession = (Component) => {
+    return function WithSessionComponent({...props}) {
 
-        const [authenticated, setAuthenticated] = useState(null);
+        const [loggedIn, setLoggedIn] = useState(null)
 
-        useEffect( () => {
-            authService.isAuthenticated()
-                .then( result => setAuthenticated(result) );
-        },[]);
+        useEffect( () => {  
 
-        if (authenticated === null) return null;
-        if (!authenticated) return ( <Redirect push to={redirectLocation} /> );
-        if (authenticated) return ( <Component {...props} /> );
+            sessionService.session()
+            .then( session => {
+                if (session) {
+                    setLoggedIn(true);
+                } else {
+                    setLoggedIn(false);
+                }
+            });
+
+        }, []);
+
+        if (loggedIn === null) return null;
+        if (!loggedIn) return (<Redirect push to={'/'} />);
+        if (loggedIn) return ( <Component {...props} /> );
     };
 };
 
-export default WithAuth;
+export default WithSession;

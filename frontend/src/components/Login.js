@@ -4,23 +4,28 @@ import sessionService from '../services/sessionService';
 import { Redirect } from 'react-router-dom';
 
 function Login() {
-    
+  
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [loggedIn, setLoggedIn] = useState(false)
 
   useEffect( () => {  
-    
-    if (sessionService.session()) setLoggedIn(true);
 
-  }, [loggedIn]);
+    sessionService.session()
+      .then( session => {
+        if (session) setLoggedIn(true)
+      });
+
+  }, []);
 
   
   const login = async () => {
-    const token = await sessionService.login({ username, password });
-    if (token) {
-        localStorage.setItem('token',  token);
+    const logged = await sessionService.login({ username, password });
+    if (logged.token) {
+        localStorage.setItem('token',  logged.token);
         setLoggedIn(true);
+    } else {
+      console.log(logged.error);
     }
   };
 
@@ -44,7 +49,7 @@ function Login() {
       </nav>
     );
   }
-    
+
 }
 
 export default Login;

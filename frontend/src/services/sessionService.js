@@ -1,20 +1,20 @@
 import { env } from '../env';
 
-const session =  () => {
+const session = async () => {
 
     if (!localStorage.getItem('token')) return false;
-    const result =  
-        fetch(`${env.BACKEND_URL}/api/session`, {
+    const userid = await fetch(`${env.BACKEND_URL}/api/session`, {
             method: 'POST',
             headers: {
               "Content-Type": "application/json",
               "Accept": "application/json",
               token: localStorage.getItem('token'),
             },
-          })
-            .then(result => result.json())
-            .then(json => json.token);
-    return (result.userid)? true : false;
+        })
+        .then(result => result.json())
+        .then(json => json.token)
+        .then(token => token.userid);
+    return (userid)? true : false;
 
 };
 
@@ -32,8 +32,7 @@ const login = async({ username, password }) => {
                 "password": password
             })
           })
-            .then(result => result.json())
-            .then(json => json.token);
+            .then(result => result.json());
     return result;
 
 };

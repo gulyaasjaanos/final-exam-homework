@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { Redirect } from 'react-router-dom';
+import WithSession from './WithSession';
 
 function Logout() {
 
@@ -24,4 +25,4 @@ function Logout() {
     
 }
 
-export default Logout;
+export default WithSession(Logout);
