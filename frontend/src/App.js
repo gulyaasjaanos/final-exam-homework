@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Login from './components/Login';
 import Logout from './components/Logout';
+import Content from './components/Content';
 
 function App() {
   return (
@@ -12,7 +13,8 @@ function App() {
             <Login />
           </Route>
           <Route path="/items">
-            <Logout/>
+            <Logout />
+            <Content />
           </Route>
         </Switch>  
       </BrowserRouter>
