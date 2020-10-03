@@ -18,6 +18,7 @@ function App() {
           <Route exact path="/items"  >
             <Menu />
             <Console />
+            <Items />
           </Route>
           <Route path="/items/:id"  >
             <Menu />

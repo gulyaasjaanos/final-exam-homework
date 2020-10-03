@@ -28,9 +28,24 @@ const get = async (id) => {
     return result;
 };
 
+const buy = async (id) => {
+    const result =  
+        await fetch(`${env.BACKEND_URL}/api/items/${id}`, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                token: localStorage.getItem('token'),
+            },
+          })
+            .then(result => result.json());
+    return result;
+};
+
 const itemService = {
     list,
-    get
+    get,
+    buy
 };
 
 export default itemService;

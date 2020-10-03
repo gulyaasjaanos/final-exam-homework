@@ -17,7 +17,6 @@ function Menu() {
   };
 
   switch(menuSelection) {
-
     case 'logout':
       return (<Redirect push to={'/'} />);
     case 'sell':

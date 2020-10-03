@@ -18,3 +18,15 @@ export const listitems = () => async dispatch => {
     );
 
 };
+
+export const getitem = (id) => async dispatch => {
+
+    const item = await itemService.get(id);
+    dispatch(
+        {
+            type : 'ITEM/GETITEM',
+            payload : item
+        }
+    );
+
+};

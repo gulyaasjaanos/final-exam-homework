@@ -8,7 +8,6 @@ function Items({items, listitems}) {
 
   useEffect( () => {  
 
-    console.log('listing items')
     listitems();
 
   }, [listitems]);

@@ -1,40 +1,82 @@
 import React from 'react';
-import { useEffect } from 'react';
+import { Redirect } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import WithSession from './WithSession';
-import { listitems } from '../actions';
+import itemService from '../services/itemService';
+import { adderror } from '../actions';
 import { connect } from 'react-redux';
 
-function SingleItem({items, listitems}) {
-
+function SingleItem({error, adderror}) {
 
   const { id } = useParams();
+  const [item, setItem] = useState(null);
+  const [canBuy, setCanBuy] = useState(false);
+  const [menuSelection, setMenuSelection] = useState(null)  
 
   useEffect( () => {  
 
-    console.log('listing items')
-    listitems();
+    itemService.get(id)
+      .then( getItem => {
+        if (!getItem.error) {
+          setItem(getItem);
+          if (getItem.ownername) setCanBuy(true);
+          setMenuSelection('itemview');
+        } else {
+          adderror(getItem.error);
+        }
+      });
 
-  }, [listitems]);
+  }, [id, adderror]);
 
-  return (
-    <p>ID: {id}</p>
-  );
+  const buy = async () => {
+
+      itemService.buy(id)
+      .then( getItem => {
+        if (!getItem.error) {
+          setItem(getItem);
+          if (!getItem.ownername) setCanBuy(false);
+          adderror('You have bought this item.');
+        } else {
+          adderror(getItem.error);
+        }
+      });
+      
+  };
+
+  const back = async () => {  
+    setMenuSelection('back');
+  };
+
+  switch(menuSelection) {
+    case 'itemview':
+      return (
+        <>
+          <p>ID: {id}</p>
+          { Object.keys(item).map( (e,i) => { return (<p key={i}>{item[e]}</p>) })}
+          <button onClick={back}>BACK</button>
+          { (canBuy) ? <button onClick={buy}>BUY</button> : null }
+        </>
+      );
+    case 'back':
+      return (<Redirect push to={'/items'} />);
+    default:
+      return null;
+  }
     
 };
 
 const mapStateToProps = state => (
   {
-    items: state.items,
+    error: state.error,
   }
 );
-
 
 const mapDispatchToProps = dispatch => (
   {
-    listitems: () => dispatch( listitems() )
+    adderror: (message) => dispatch( adderror(message) )
   }
 );
-
-
+ 
 export default connect(mapStateToProps,mapDispatchToProps)( WithSession(SingleItem) );
+
