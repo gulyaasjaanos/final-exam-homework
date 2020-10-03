@@ -2,7 +2,8 @@ import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Login from './components/Login';
 import Menu from './components/Menu';
-import Content from './components/Content';
+import Items from './components/Items';
+import SingleItem from './components/SingleItem';
 import Console from './components/Console';
 
 function App() {
@@ -14,10 +15,14 @@ function App() {
             <Login />
             <Console />
           </Route>
-          <Route path="/items">
+          <Route exact path="/items"  >
             <Menu />
             <Console />
-            <Content />
+          </Route>
+          <Route path="/items/:id"  >
+            <Menu />
+            <Console />
+            <SingleItem />
           </Route>
         </Switch>  
       </BrowserRouter>

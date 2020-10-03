@@ -4,7 +4,7 @@ import { combineReducers } from 'redux';
 
 const rootReducer = combineReducers({
     error : errorReducer,
-    item : itemReducer
+    items : itemReducer
 });
 
 export default rootReducer;
