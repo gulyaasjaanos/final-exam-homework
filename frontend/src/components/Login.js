@@ -5,7 +5,7 @@ import { Redirect } from 'react-router-dom';
 import { adderror } from '../actions';
 import { connect } from 'react-redux';
 
-function LoginComponent({error, adderror}) {
+function Login({error, adderror}) {
   
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -69,4 +69,4 @@ const mapDispatchToProps = dispatch => (
 );
  
 
-export const Login = connect(mapStateToProps,mapDispatchToProps)( LoginComponent );
+export default connect(mapStateToProps,mapDispatchToProps)( Login );

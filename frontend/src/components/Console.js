@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-function ConsoleComponent({ error }) {
+function Console({ error }) {
 
   return (
     <p>{error}</p>
@@ -15,4 +15,4 @@ const mapStateToProps = state => (
   }
 );
 
-export const Console = connect(mapStateToProps)( ConsoleComponent );
+export default connect(mapStateToProps)( Console );

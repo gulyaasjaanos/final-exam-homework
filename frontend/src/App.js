@@ -1,9 +1,9 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import { Login } from './components/Login';
-import Logout from './components/Logout';
+import Login from './components/Login';
+import Menu from './components/Menu';
 import Content from './components/Content';
-import { Console } from './components/Console';
+import Console from './components/Console';
 
 function App() {
   return (
@@ -15,7 +15,7 @@ function App() {
             <Console />
           </Route>
           <Route path="/items">
-            <Logout />
+            <Menu />
             <Console />
             <Content />
           </Route>
