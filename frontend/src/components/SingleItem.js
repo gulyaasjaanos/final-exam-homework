@@ -61,7 +61,11 @@ function SingleItem({error, adderror}) {
     case 'back':
       return (<Redirect push to={'/items'} />);
     default:
-      return null;
+      return (
+        <>
+          <button onClick={back}>BACK</button>
+        </>
+      );
   }
     
 };

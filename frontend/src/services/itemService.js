@@ -42,10 +42,31 @@ const buy = async (id) => {
     return result;
 };
 
+const sell = async ({itemname, description, url, price}) => {
+    const result =  
+        await fetch(`${env.BACKEND_URL}/api/items`, {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                token: localStorage.getItem('token'),
+            },
+            body: JSON.stringify({
+                "itemname" : itemname,
+                "description" : description,
+                "url" : url,
+                "price" : price
+            })
+          })
+            .then(result => result.json());
+    return result;
+};
+
 const itemService = {
     list,
     get,
-    buy
+    buy,
+    sell
 };
 
 export default itemService;
