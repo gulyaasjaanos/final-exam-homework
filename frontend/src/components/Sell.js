@@ -44,6 +44,20 @@ function Sell({error, adderror}) {
     }
   };
 
+  const sellItem = () => {
+
+    itemService.sell({itemname, description, url, price})
+      .then( getItem => {
+        if (!getItem.error) {
+          setMenuSelection('sold');
+          adderror('You have offered this item for sale.');
+        } else {
+          adderror(getItem.error);
+        }
+      });
+
+  };
+
   switch(menuSelection) {
     case 'sold':
       return (
@@ -58,10 +72,10 @@ function Sell({error, adderror}) {
         <>
           <p>Sell this item:</p>
           itemname: <input type="text" value={itemname} onChange={(event) => changeField('itemname',event)}></input>
-          description: <input type="text" value={description} onChange={(event) => changeField('description',event)}></input>
+          description: <textarea value={description} onChange={(event) => changeField('description',event)}></textarea>
           url: <input type="text" value={url} onChange={(event) => changeField('url',event)}></input>
           price: <input type="text" value={price} onChange={(event) => changeField('price',event)}></input>
-          { (canSell) ? <button onClick={console.log()}>SELL</button> : null }
+          { (canSell) ? <button onClick={sellItem}>SELL ITEM</button> : null }
           <button onClick={back}>BACK</button>
         </>
       );

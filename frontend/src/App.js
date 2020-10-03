@@ -21,12 +21,12 @@ function App() {
             <Console />
             <Items />
           </Route>
-          <Route path="/items/:id"  >
+          <Route exact path="/items/:id"  >
             <Menu />
             <Console />
             <SingleItem />
           </Route>
-          <Route path="/sell"  >
+          <Route exact path="/sell"  >
             <Menu />
             <Console />
             <Sell />
