@@ -37,9 +37,26 @@ const login = async({ username, password }) => {
 
 };
 
+const userData = async () => {
+
+    const userData = await fetch(`${env.BACKEND_URL}/api/session`, {
+            method: 'GET',
+            headers: {
+              "Content-Type": "application/json",
+              "Accept": "application/json",
+              token: localStorage.getItem('token'),
+            },
+        })
+        .then(result => result.json())
+        .then(json => json.userData);
+    return (userData);
+
+};
+
 const sessionService = {
     session,
-    login
+    login,
+    userData
 };
 
 export default sessionService;

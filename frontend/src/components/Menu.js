@@ -1,12 +1,19 @@
 import React from 'react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Redirect, Link } from 'react-router-dom';
 import WithSession from './WithSession';
+import { setUserDataAction } from '../actions';
 import { connect } from 'react-redux';
 
-function Menu({username}) {
+function Menu({userData, setUserData}) {
 
   const [menuSelection, setMenuSelection] = useState(null)                 
+
+  useEffect( () => {  
+
+    setUserData();
+
+  }, [setUserData]);
 
   const logout = () => {
     localStorage.removeItem('token', 'set');
@@ -20,7 +27,7 @@ function Menu({username}) {
     default:
       return (
         <nav>
-          <header>Hi {username}</header>
+          <header>Hi {userData.username}! Your balance is: {userData.dollar} GB$.</header>
           <Link to="/sell">SELL</Link>
           <button onClick={logout}>LOGOUT</button>
         </nav>
@@ -31,8 +38,14 @@ function Menu({username}) {
 
 const mapStateToProps = state => (
   {
-    username: state.session,
+    userData: state.session,
   }
 );
 
-export default connect(mapStateToProps)( WithSession(Menu) );
+const mapDispatchToProps = dispatch => (
+  {
+    setUserData: () => dispatch( setUserDataAction() )
+  }
+);
+
+export default connect(mapStateToProps, mapDispatchToProps)( WithSession(Menu) );

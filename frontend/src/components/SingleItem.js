@@ -4,10 +4,10 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import WithSession from './WithSession';
 import itemService from '../services/itemService';
-import { consoleLogAction } from '../actions';
+import { consoleLogAction, setUserDataAction } from '../actions';
 import { connect } from 'react-redux';
 
-function SingleItem({console, consoleLog}) {
+function SingleItem({console, consoleLog, setUserData}) {
 
   const { id } = useParams();
   const [item, setItem] = useState(null);
@@ -36,6 +36,7 @@ function SingleItem({console, consoleLog}) {
         if (!getItem.error) {
           setItem(getItem);
           if (!getItem.ownername) setCanBuy(false);
+          setUserData();
           consoleLog('You have bought this item.');
         } else {
           consoleLog(getItem.error);
@@ -80,7 +81,8 @@ const mapStateToProps = state => (
 
 const mapDispatchToProps = dispatch => (
   {
-    consoleLog: (message) => dispatch( consoleLogAction(message) )
+    consoleLog: (message) => dispatch( consoleLogAction(message) ),
+    setUserData: () => dispatch( setUserDataAction() )
   }
 );
  

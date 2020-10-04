@@ -1,4 +1,5 @@
 import itemService from '../services/itemService';
+import sessionService from '../services/sessionService';
 
 export const consoleLogAction = message => (
     {
@@ -19,9 +20,14 @@ export const listItemsAction = () => async dispatch => {
 
 };
 
-export const setNameAction = username => (
-    {
-        type : 'SESSION/SETNAME',
-        payload : username
-    }
-);
+export const setUserDataAction = () => async dispatch => {
+    
+    const userData = await sessionService.userData();
+    dispatch(
+        {
+            type : 'SESSION/SETDATA',
+            payload : userData
+        }
+    );
+
+};
