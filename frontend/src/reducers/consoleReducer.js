@@ -1,7 +1,7 @@
-const errorReducer = (state = 'no error', action) => {
+const consoleReducer = (state = '', action) => {
 
     switch(action.type) {
-        case 'ERROR/ADDERROR':
+        case 'CONSOLE/LOG':
             return action.payload;
         default:
             return state;
@@ -9,4 +9,4 @@ const errorReducer = (state = 'no error', action) => {
 
 };
 
-export default errorReducer;
+export default consoleReducer;

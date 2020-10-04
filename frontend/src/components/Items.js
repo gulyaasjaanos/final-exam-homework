@@ -2,16 +2,16 @@ import React from 'react';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import WithSession from './WithSession';
-import { listitems } from '../actions';
+import { listItemsAction } from '../actions';
 import { connect } from 'react-redux';
 
-function Items({items, listitems}) {
+function Items({items, listItems}) {
 
   useEffect( () => {  
 
-    listitems()
+    listItems()
 
-  }, [listitems]);
+  }, [listItems]);
 
   return (
     <>
@@ -40,7 +40,7 @@ const mapStateToProps = state => (
 
 const mapDispatchToProps = dispatch => (
   {
-    listitems: () => dispatch( listitems() )
+    listItems: () => dispatch( listItemsAction() )
   }
 );
 

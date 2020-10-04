@@ -3,10 +3,10 @@ import { Redirect } from 'react-router-dom';
 import { useState } from 'react';
 import WithSession from './WithSession';
 import itemService from '../services/itemService';
-import { adderror } from '../actions';
+import { consoleLogAction } from '../actions';
 import { connect } from 'react-redux';
 
-function Sell({error, adderror}) {
+function Sell({console, consoleLog}) {
 
   const [itemname, setItemname] = useState('');
   const [description, setDescription] = useState('');
@@ -50,9 +50,9 @@ function Sell({error, adderror}) {
       .then( getItem => {
         if (!getItem.error) {
           setMenuSelection('sold');
-          adderror('You have offered this item for sale.');
+          consoleLog('You have offered this item for sale.');
         } else {
-          adderror(getItem.error);
+          consoleLog(getItem.error);
         }
       });
 
@@ -85,13 +85,13 @@ function Sell({error, adderror}) {
 
 const mapStateToProps = state => (
   {
-    error: state.error,
+    console: state.console,
   }
 );
 
 const mapDispatchToProps = dispatch => (
   {
-    adderror: (message) => dispatch( adderror(message) )
+    consoleLog: (message) => dispatch( consoleLogAction(message) )
   }
 );
  

@@ -1,17 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-function Console({ error }) {
+function Console({ console }) {
 
   return (
-    <p>{error}</p>
+    <p className={console}>{console}</p>
   );
     
 };
 
 const mapStateToProps = state => (
   {
-    error: state.error,
+    console: state.console,
   }
 );
 

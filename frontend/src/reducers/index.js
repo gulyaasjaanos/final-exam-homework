@@ -1,9 +1,9 @@
-import errorReducer from './errorReducer';
+import consoleReducer from './consoleReducer';
 import itemReducer from './itemReducer';
 import { combineReducers } from 'redux';
 
 const rootReducer = combineReducers({
-    error : errorReducer,
+    console : consoleReducer,
     items : itemReducer
 });
 

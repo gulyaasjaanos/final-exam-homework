@@ -4,10 +4,10 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import WithSession from './WithSession';
 import itemService from '../services/itemService';
-import { adderror } from '../actions';
+import { consoleLogAction } from '../actions';
 import { connect } from 'react-redux';
 
-function SingleItem({error, adderror}) {
+function SingleItem({console, consoleLog}) {
 
   const { id } = useParams();
   const [item, setItem] = useState(null);
@@ -23,11 +23,11 @@ function SingleItem({error, adderror}) {
           if (getItem.ownername) setCanBuy(true);
           setMenuSelection('itemview');
         } else {
-          adderror(getItem.error);
+          consoleLog(getItem.error);
         }
       });
 
-  }, [id, adderror]);
+  }, [id, consoleLog]);
 
   const buy = async () => {
 
@@ -36,9 +36,9 @@ function SingleItem({error, adderror}) {
         if (!getItem.error) {
           setItem(getItem);
           if (!getItem.ownername) setCanBuy(false);
-          adderror('You have bought this item.');
+          consoleLog('You have bought this item.');
         } else {
-          adderror(getItem.error);
+          consoleLog(getItem.error);
         }
       });
       
@@ -74,13 +74,13 @@ function SingleItem({error, adderror}) {
 
 const mapStateToProps = state => (
   {
-    error: state.error,
+    console: state.console,
   }
 );
 
 const mapDispatchToProps = dispatch => (
   {
-    adderror: (message) => dispatch( adderror(message) )
+    consoleLog: (message) => dispatch( consoleLogAction(message) )
   }
 );
  

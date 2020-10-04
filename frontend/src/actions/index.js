@@ -1,13 +1,13 @@
 import itemService from '../services/itemService';
 
-export const adderror = message => (
+export const consoleLogAction = message => (
     {
-        type : 'ERROR/ADDERROR',
+        type : 'CONSOLE/LOG',
         payload : message
     }
 );
 
-export const listitems = () => async dispatch => {
+export const listItemsAction = () => async dispatch => {
 
     const items = await itemService.list();
     dispatch(
