@@ -2,13 +2,15 @@ import React from 'react';
 import { useState } from 'react';
 import { Redirect, Link } from 'react-router-dom';
 import WithSession from './WithSession';
+import { connect } from 'react-redux';
 
-function Menu() {
+function Menu({username}) {
 
   const [menuSelection, setMenuSelection] = useState(null)                 
 
   const logout = () => {
     localStorage.removeItem('token', 'set');
+    localStorage.removeItem('username', 'set');
     setMenuSelection('logout');
   };
 
@@ -18,13 +20,19 @@ function Menu() {
     default:
       return (
         <nav>
-          <header>Hi User</header>
+          <header>Hi {username}</header>
           <Link to="/sell">SELL</Link>
           <button onClick={logout}>LOGOUT</button>
         </nav>
       );
   }
 
-}
+};
 
-export default WithSession(Menu);
+const mapStateToProps = state => (
+  {
+    username: state.session,
+  }
+);
+
+export default connect(mapStateToProps)( WithSession(Menu) );

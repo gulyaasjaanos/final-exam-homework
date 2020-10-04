@@ -2,10 +2,10 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import sessionService from '../services/sessionService';
 import { Redirect } from 'react-router-dom';
-import { consoleLogAction } from '../actions';
+import { consoleLogAction, setNameAction } from '../actions';
 import { connect } from 'react-redux';
 
-function Login({console, consoleLog}) {
+function Login({console, consoleLog, sessionUser, setName}) {
   
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -25,8 +25,10 @@ function Login({console, consoleLog}) {
     const logged = await sessionService.login({ username, password });
     if (logged.token) {
         localStorage.setItem('token',  logged.token);
+        localStorage.setItem('username',  username);
         setLoggedIn(true);
         consoleLog('');
+        setName(username);
     } else {
       consoleLog(logged.error);
     }
@@ -58,13 +60,15 @@ function Login({console, consoleLog}) {
 const mapStateToProps = state => (
   {
     console: state.console,
+    sessionUser: state.session
   }
 );
 
 
 const mapDispatchToProps = dispatch => (
   {
-    consoleLog: (message) => dispatch( consoleLogAction(message) )
+    consoleLog: (message) => dispatch( consoleLogAction(message) ),
+    setName: (username) => dispatch( setNameAction(username) )
   }
 );
  

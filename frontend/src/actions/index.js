@@ -18,3 +18,10 @@ export const listItemsAction = () => async dispatch => {
     );
 
 };
+
+export const setNameAction = username => (
+    {
+        type : 'SESSION/SETNAME',
+        payload : username
+    }
+);
