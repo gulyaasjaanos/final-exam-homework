@@ -53,7 +53,9 @@ function SingleItem({error, adderror}) {
       return (
         <>
           <p>ID: {id}</p>
-          { Object.keys(item).map( (e,i) => { return (<p key={i}>{item[e]}</p>) })}
+          <ul className='itemCard' >
+            {Object.keys(item).map( (key,i) => (<li key={i}>{item[key]}</li>) )}
+          </ul>
           <button onClick={back}>BACK</button>
           { (canBuy) ? <button onClick={buy}>BUY</button> : null }
         </>

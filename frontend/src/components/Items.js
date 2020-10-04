@@ -17,9 +17,12 @@ function Items({items, listitems}) {
     <>
       <p>ITEMS FOR SALE</p>
       { items.map( item => (
-        <Link to={`/items/${item.id}`}>
+        <Link to={`/items/${item.id}`} key={item.id}>
           <ul className='itemCard' >
-            {Object.keys(item).map( (key,i) => { return (<li key={i}>{item[key]}</li>) })}
+            {Object.keys(item).map( (key,i) => {
+                return (key !== 'id') ? (<li key={i}>{item[key]}</li>) : null
+              }
+            )}
           </ul>
         </Link>
       ))}
