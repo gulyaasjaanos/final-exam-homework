@@ -49,13 +49,29 @@ function SingleItem({console, consoleLog, setUserData}) {
     setMenuSelection('back');
   };
 
+  const keyHandler = (item,key) => {
+    switch (key) {
+      case 'id':
+        return null;
+      case 'url':
+        return  <li key={key}><img src={item[key]} alt={item[key]} /></li>;
+      case 'price':
+          return  <li key={key}>{item[key]} GB$</li>;
+      default:
+        return <li key={key}>{item[key]}</li>;
+    }
+  };
+
   switch(menuSelection) {
     case 'itemview':
       return (
         <>
           <p>ID: {id}</p>
           <ul className='itemCard' >
-            {Object.keys(item).map( (key,i) => (<li key={i}>{item[key]}</li>) )}
+            {Object.keys(item).map( key => {
+                return keyHandler(item,key);
+              }
+            )}
           </ul>
           <button onClick={back}>BACK</button>
           { (canBuy) ? <button onClick={buy}>BUY</button> : null }
