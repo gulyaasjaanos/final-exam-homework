@@ -1,4 +1,4 @@
-const itemReducer = (state = '', action) => {
+const itemReducer = (state = [], action) => {
 
     switch(action.type) {
         case 'ITEM/LISTITEMS':

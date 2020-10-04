@@ -1,5 +1,6 @@
 import React from 'react';
 import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import WithSession from './WithSession';
 import { listitems } from '../actions';
 import { connect } from 'react-redux';
@@ -8,12 +9,21 @@ function Items({items, listitems}) {
 
   useEffect( () => {  
 
-    listitems();
+    listitems()
 
   }, [listitems]);
 
   return (
-    <p>CONTENT HERE</p>
+    <>
+      <p>ITEMS FOR SALE</p>
+      { items.map( item => (
+        <Link to={`/items/${item.id}`}>
+          <ul className='itemCard' >
+            {Object.keys(item).map( (key,i) => { return (<li key={i}>{item[key]}</li>) })}
+          </ul>
+        </Link>
+      ))}
+    </>
   );
     
 };

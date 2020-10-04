@@ -15,7 +15,7 @@ export class ItemRepo {
 
     async getSellable() {
 
-        const sellable = (await this.db.query('SELECT name, description, url, price FROM items WHERE status="sellable"')).results;
+        const sellable = (await this.db.query('SELECT id, name, description, url, price FROM items WHERE status="sellable"')).results;
         return sellable;
 
     };
