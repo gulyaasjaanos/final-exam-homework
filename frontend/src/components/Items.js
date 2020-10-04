@@ -13,14 +13,27 @@ function Items({items, listItems}) {
 
   }, [listItems]);
 
+  const keyHandler = (item,key) => {
+    switch (key) {
+      case 'id':
+        return null;
+      case 'url':
+        return  <li key={key}><img src={item[key]} alt={item[key]} /></li>;
+      case 'price':
+          return  <li key={key}>{item[key]} GB$</li>;
+      default:
+        return <li key={key}>{item[key]}</li>;
+    }
+  };
+
   return (
     <>
       <p>ITEMS FOR SALE</p>
       { items.map( item => (
         <Link to={`/items/${item.id}`} key={item.id}>
           <ul className='itemCard' >
-            {Object.keys(item).map( (key,i) => {
-                return (key !== 'id') ? (<li key={i}>{item[key]}</li>) : null
+            {Object.keys(item).map( key => {
+                return keyHandler(item,key);
               }
             )}
           </ul>
