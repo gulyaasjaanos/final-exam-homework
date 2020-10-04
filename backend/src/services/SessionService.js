@@ -14,6 +14,15 @@ export class SessionService {
 
     };
 
+    async userData({ userid }) {
+
+      const userData =  await this.user.getById({ userid });
+      delete userData.id;
+      delete userData.password;
+      return userData;
+
+    };
+
     verifyToken({ token }) {
 
         try {

@@ -13,7 +13,8 @@ router.use(cors());
 router.use(bodyParser.json());
 
 router.post('/session', sessionController.post );
-router.use('/items', sessionMiddleware.post );
+router.use('/', sessionMiddleware.post );
+router.get('/session', sessionController.get );
 router.get('/items', itemController.get );
 router.get('/items/:itemid', itemController.get );
 router.post('/items', itemController.post );

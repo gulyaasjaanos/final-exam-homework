@@ -3,6 +3,7 @@ export class SessionController {
     constructor( sessionService ) {
         this.session = sessionService;
         this.post = this.post.bind(this);
+        this.get = this.get.bind(this);
     };
 
     async post(req, res, next) {
@@ -17,5 +18,17 @@ export class SessionController {
         }     
 
     };
+
+    async get(req, res, next) {
+
+        const userid = req.userid;
+        try {
+            const userData = await this.session.userData({ userid });
+            res.status(200).send({userData});
+        } catch(error) {
+            next(error);
+        }     
+
+    };  
 
 };
