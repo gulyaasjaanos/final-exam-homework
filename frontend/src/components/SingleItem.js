@@ -53,10 +53,14 @@ function SingleItem({console, consoleLog, setUserData}) {
     switch (key) {
       case 'id':
         return null;
+      case 'name':
+        return <li className="gridHeader" key={key}>{item[key]}</li>;
+      case 'description':
+          return <li className="gridLeft" key={key}>{item[key]}</li>;
       case 'url':
-        return  <li key={key}><img src={item[key]} alt={item[key]} /></li>;
+        return  <li className="gridRight" key={key}><img className="bigimg" src={item[key]} alt={item[key]} /></li>;
       case 'price':
-          return  <li key={key}>{item[key]} GB$</li>;
+          return  <li className="gridFooter" key={key}>{item[key]} GB$</li>;
       default:
         return <li key={key}>{item[key]}</li>;
     }
@@ -66,13 +70,15 @@ function SingleItem({console, consoleLog, setUserData}) {
     case 'itemview':
       return (
         <>
-          <p>ID: {id}</p>
+          <header>ITEM #{id}</header>
+          <article className='item'>
           <ul className='itemCard' >
             {Object.keys(item).map( key => {
                 return keyHandler(item,key);
               }
             )}
           </ul>
+          </article>
           <button onClick={back}>BACK</button>
           { (canBuy) ? <button onClick={buy}>BUY</button> : null }
         </>

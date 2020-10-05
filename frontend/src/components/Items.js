@@ -17,10 +17,14 @@ function Items({items, listItems}) {
     switch (key) {
       case 'id':
         return null;
+      case 'name':
+        return <li className="gridHeader" key={key}>{item[key]}</li>;
+      case 'description':
+          return <li className="gridLeft" key={key}>{item[key]}</li>;
       case 'url':
-        return  <li key={key}><img src={item[key]} alt={item[key]} /></li>;
+        return  <li className="gridRight" key={key}><img src={item[key]} alt={item[key]} /></li>;
       case 'price':
-          return  <li key={key}>{item[key]} GB$</li>;
+          return  <li className="gridFooter" key={key}>{item[key]} GB$</li>;
       default:
         return <li key={key}>{item[key]}</li>;
     }
@@ -28,7 +32,8 @@ function Items({items, listItems}) {
 
   return (
     <>
-      <p>ITEMS FOR SALE</p>
+      <header>ITEMS FOR SALE</header>
+      <article className='itemlist'>
       { items.map( item => (
         <Link to={`/items/${item.id}`} key={item.id}>
           <ul className='itemCard' >
@@ -39,6 +44,7 @@ function Items({items, listItems}) {
           </ul>
         </Link>
       ))}
+      </article>
     </>
   );
     

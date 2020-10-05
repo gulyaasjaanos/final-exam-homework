@@ -4,6 +4,7 @@ import { Redirect, Link } from 'react-router-dom';
 import WithSession from './WithSession';
 import { setUserDataAction } from '../actions';
 import { connect } from 'react-redux';
+import '../styling/menu.css';
 
 function Menu({userData, setUserData}) {
 
@@ -27,7 +28,7 @@ function Menu({userData, setUserData}) {
     default:
       return (
         <nav>
-          <header>Hi {userData.username}! Your balance is: {userData.dollar} GB$.</header>
+          <header>Hi <span>{userData.username}</span>! Your balance is: <span>{userData.dollar}</span> GB$.</header>
           <Link to="/sell">SELL</Link>
           <button onClick={logout}>LOGOUT</button>
         </nav>

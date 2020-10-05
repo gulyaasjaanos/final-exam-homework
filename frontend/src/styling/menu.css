@@ -1,0 +1,29 @@
+nav {
+    margin: 1em;
+}
+
+nav header {
+    padding-left: 0;
+}
+
+nav span {
+    font-weight: 600;
+    font-size: 1.1em;
+    color: darkblue;
+}
+
+nav a,
+button {
+    font-weight: 400;
+    color: #eee;
+    background: rgb(71, 71, 129);
+    border: 1px solid white;
+    padding: 0.2em 0.3em;
+    min-height: 2.1em;
+    cursor: pointer;
+    margin: 0.2em;
+}
+
+nav a:link {
+    text-decoration: none;
+}

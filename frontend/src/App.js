@@ -6,10 +6,11 @@ import Items from './components/Items';
 import SingleItem from './components/SingleItem';
 import Console from './components/Console';
 import Sell from './components/Sell';
+import './styling/app.css';
 
 function App() {
   return (
-    <div className="App">
+    <main>
       <BrowserRouter>
         <Switch>
           <Route exact path="/">
@@ -33,7 +34,7 @@ function App() {
           </Route>
         </Switch>  
       </BrowserRouter>
-    </div>
+    </main>
   );
 }
 

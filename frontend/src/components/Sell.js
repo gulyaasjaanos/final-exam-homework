@@ -5,6 +5,8 @@ import WithSession from './WithSession';
 import itemService from '../services/itemService';
 import { consoleLogAction } from '../actions';
 import { connect } from 'react-redux';
+import '../styling/sell.css';
+
 
 function Sell({console, consoleLog}) {
 
@@ -70,11 +72,13 @@ function Sell({console, consoleLog}) {
     default:
       return (
         <>
-          <p>Sell this item:</p>
-          itemname: <input type="text" value={itemname} onChange={(event) => changeField('itemname',event)}></input>
-          description: <textarea value={description} onChange={(event) => changeField('description',event)}></textarea>
-          url: <input type="text" value={url} onChange={(event) => changeField('url',event)}></input>
-          price: <input type="text" value={price} onChange={(event) => changeField('price',event)}></input>
+          <header>Sell this item:</header>
+          <form>
+            <p>itemname: <input type="text" value={itemname} onChange={(event) => changeField('itemname',event)}></input></p>
+            <p>description: <textarea value={description} onChange={(event) => changeField('description',event)}></textarea></p>
+            <p>url: <input type="text" value={url} onChange={(event) => changeField('url',event)}></input></p>
+            <p>price: <input type="text" value={price} onChange={(event) => changeField('price',event)}></input></p>
+          </form>
           { (canSell) ? <button onClick={sellItem}>SELL ITEM</button> : null }
           <button onClick={back}>BACK</button>
         </>
