@@ -66,9 +66,9 @@ export class ItemService {
       const {canBuy, dollar, username} = await this.checkDollar({userid, price});
       if(!canBuy) throw new Error('invalidDollar');
 
-      this.user.updateDollar({ userid, dollar : dollar-price });
+      await this.user.updateDollar({ userid, dollar : dollar-price });
       const ownerDollar = (await this.user.getById({ userid : item.ownerid })).dollar;
-      this.user.updateDollar({ userid : item.ownerid, dollar : ownerDollar+price });
+      await this.user.updateDollar({ userid : item.ownerid, dollar : ownerDollar+price });
 
       await this.item.update({itemid, userid});
 
