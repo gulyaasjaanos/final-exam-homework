@@ -63,3 +63,28 @@ test('valid username and password returns token', done => {
       return done();
     });
 });
+
+test('invalid token returns', done => {
+  db.query.mockImplementation( () => (
+    { results: [
+        {
+            id: 1,
+            name: "itemtosale",
+            description: "item description",
+            url: "www.someurl.com",
+            price: 5000
+        }
+    ]}
+  ));
+  request(app)
+    .get('/api/items')
+    .set('Accept', 'application/json')
+    .set('token', 'invalid token')
+    .expect('Content-Type', /json/)
+    .expect(401)
+    .end((err, data) => {
+      if (err) return done(err);
+      expect(data.body.error).toBe("Login required.");
+      return done();
+    });
+});
