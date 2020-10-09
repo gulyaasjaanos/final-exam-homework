@@ -27,11 +27,15 @@ function Menu({userData, setUserData}) {
       return (<Redirect push to={'/'} />);
     default:
       return (
-        <nav>
-          <header>Hi <span>{userData.username}</span>! Your balance is: <span>{userData.dollar}</span> GB$.</header>
-          <Link to="/sell">SELL</Link>
-          <Link onClick={logout}>LOGOUT</Link>
-        </nav>
+        <header>
+          <nav>
+            <p>Hi <span>{userData.username}</span>! Your balance is: <span>{userData.dollar}</span> GB$.</p>
+            <Link to="/sell">SELL</Link>
+            <Link onClick={logout}>LOGOUT</Link>
+          </nav>
+          <img className="profileimg" src={userData.profileimg} alt="profile" />
+        </header>
+        
       );
   }
 
