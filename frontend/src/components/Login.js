@@ -47,8 +47,8 @@ function Login({console, consoleLog }) {
     return (
       <nav>
         <header>Hi Stranger</header>
-        <input type="text" value={username} onChange={(event) => changeUsername(event)}></input>
-        <input type="password" value={password} onChange={(event) => changePassword(event)}></input>
+        <input type="text" value={username} placeholder="username" onChange={(event) => changeUsername(event)}></input>
+        <input type="password" value={password} placeholder="password" onChange={(event) => changePassword(event)}></input>
         <button onClick={login}>LOGIN</button>
       </nav>
     );
