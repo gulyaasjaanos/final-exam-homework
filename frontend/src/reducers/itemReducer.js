@@ -2,7 +2,7 @@ const itemReducer = (state = [], action) => {
 
     switch(action.type) {
         case 'ITEM/LISTITEMS':
-            return Object.assign([], state, action.payload);
+            return action.payload;
         default:
             return state;
     }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import WithSession from './WithSession';
@@ -7,7 +7,7 @@ import itemService from '../services/itemService';
 import { consoleLogAction, setUserDataAction } from '../actions';
 import { connect } from 'react-redux';
 
-function SingleItem({console, consoleLog, setUserData}) {
+function SingleItem({console, consoleLog, setUserData }) {
 
   const { id } = useParams();
   const [item, setItem] = useState(null);
@@ -45,10 +45,6 @@ function SingleItem({console, consoleLog, setUserData}) {
       
   };
 
-  const back = async () => {  
-    setMenuSelection('back');
-  };
-
   const keyHandler = (item,key) => {
     switch (key) {
       case 'id':
@@ -79,17 +75,13 @@ function SingleItem({console, consoleLog, setUserData}) {
             )}
           </ul>
           </article>
-          <button onClick={back}>BACK</button>
+          <nav><Link to="/items">BACK</Link></nav>
           { (canBuy) ? <button onClick={buy}>BUY</button> : null }
         </>
       );
-    case 'back':
-      return (<Redirect push to={'/items'} />);
     default:
       return (
-        <>
-          <button onClick={back}>BACK</button>
-        </>
+        <nav><Link to="/items">BACK</Link></nav>
       );
   }
     
@@ -97,7 +89,7 @@ function SingleItem({console, consoleLog, setUserData}) {
 
 const mapStateToProps = state => (
   {
-    console: state.console,
+    console: state.console
   }
 );
 

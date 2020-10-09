@@ -9,7 +9,7 @@ function Items({items, listItems}) {
 
   useEffect( () => {  
 
-    listItems()
+    listItems();
 
   }, [listItems]);
 
@@ -34,8 +34,8 @@ function Items({items, listItems}) {
     <>
       <header>ITEMS FOR SALE</header>
       <article className='itemlist'>
-      { items.map( item => (
-        <Link to={`/items/${item.id}`} key={item.id}>
+      { items.map( (item,i) => (
+        <Link to={`/items/${item.id}`} key={i}>
           <ul className='itemCard' >
             {Object.keys(item).map( key => {
                 return keyHandler(item,key);
