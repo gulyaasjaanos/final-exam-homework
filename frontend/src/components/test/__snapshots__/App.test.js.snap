@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapeshot 1`] = `"<main><nav><header>Hi Stranger</header><input type=\\"text\\" placeholder=\\"username\\" value=\\"\\"><input type=\\"password\\" placeholder=\\"password\\" value=\\"\\"><button>LOGIN</button></nav><p></p></main>"`;
