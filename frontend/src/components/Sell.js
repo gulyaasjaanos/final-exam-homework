@@ -1,5 +1,5 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import WithSession from './WithSession';
 import itemService from '../services/itemService';
@@ -16,10 +16,6 @@ function Sell({console, consoleLog}) {
   const [price, setPrice] = useState('');
   const [canSell, setCanSell] = useState(false);
   const [menuSelection, setMenuSelection] = useState(null);
-
-  const back = async () => {  
-    setMenuSelection('back');
-  };
 
   const changeField = (target,e) => {
     switch(target) {
@@ -63,12 +59,8 @@ function Sell({console, consoleLog}) {
   switch(menuSelection) {
     case 'sold':
       return (
-        <>
-          <button onClick={back}>BACK</button>
-        </>
+        <nav><Link to="/items">BACK</Link></nav>
       );
-    case 'back':
-      return (<Redirect push to={'/items'} />);
     default:
       return (
         <>
@@ -79,8 +71,10 @@ function Sell({console, consoleLog}) {
             <p>url: <input type="text" value={url} onChange={(event) => changeField('url',event)}></input></p>
             <p>price: <input type="text" value={price} onChange={(event) => changeField('price',event)}></input></p>
           </form>
-          { (canSell) ? <button onClick={sellItem}>SELL ITEM</button> : null }
-          <button onClick={back}>BACK</button>
+          <nav>
+            { (canSell) ? <Link onClick={sellItem}>SELL ITEM</Link> : null }
+            <Link to="/items">BACK</Link>
+          </nav>
         </>
       );
   }

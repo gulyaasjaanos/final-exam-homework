@@ -30,7 +30,7 @@ function Menu({userData, setUserData}) {
         <nav>
           <header>Hi <span>{userData.username}</span>! Your balance is: <span>{userData.dollar}</span> GB$.</header>
           <Link to="/sell">SELL</Link>
-          <button onClick={logout}>LOGOUT</button>
+          <Link onClick={logout}>LOGOUT</Link>
         </nav>
       );
   }

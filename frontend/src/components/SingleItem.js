@@ -75,8 +75,10 @@ function SingleItem({console, consoleLog, setUserData }) {
             )}
           </ul>
           </article>
-          <nav><Link to="/items">BACK</Link></nav>
-          { (canBuy) ? <button onClick={buy}>BUY</button> : null }
+          <nav>
+            <Link to="/items">BACK</Link>
+            { (canBuy) ? <Link onClick={buy}>BUY</Link> : null }
+          </nav> 
         </>
       );
     default:
